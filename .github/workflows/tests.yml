@@ -24,10 +24,11 @@ jobs:
     - name: Install dependencies
       run: go mod tidy
 
+    - name: Copy .env.example file to .env
+      run: cp .env.example .env
+
     - name: Run local server
       run: |
         CGO_ENABLED=0 GOOS=linux go run main.go &
         sleep 100
         go test -run ^TestApp$ ./tests
-        
-        
